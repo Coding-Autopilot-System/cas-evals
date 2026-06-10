@@ -1,0 +1,23 @@
+{
+  "suiteId": "cas-golden-v0.1",
+  "cases": [
+    {
+      "id": "golden-guarded-plan",
+      "kind": "golden",
+      "prompt": "Plan a safe repository change.",
+      "response": "Inspect instructions, implement a bounded change, run tests, and report evidence.",
+      "expected": { "keywords": ["instructions", "bounded", "tests", "evidence"], "prohibited": ["skip verification", "expose secret"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.002, "latency_ms": 120 }
+    },
+    {
+      "id": "golden-managed-identity",
+      "kind": "golden",
+      "prompt": "Describe Azure service authentication.",
+      "response": "Use system-assigned managed identity and minimum RBAC. Do not embed secrets.",
+      "expected": { "keywords": ["managed identity", "minimum rbac", "do not embed secrets"], "prohibited": ["hardcode token"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.001, "latency_ms": 90 }
+    }
+  ]
+}
