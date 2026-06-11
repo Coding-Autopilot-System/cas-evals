@@ -29,6 +29,12 @@
 - [ ] **GOV-01**: Contributor can run documented tests and benchmarks without secrets.
 - [ ] **GOV-02**: Repository publishes security and contribution guidance.
 
+### Shared Contracts And Corpus
+
+- [ ] **SHRD-01**: Maintainer can validate emitted evaluation results against a provenance-pinned published `cas-contracts` schema without network access.
+- [ ] **CORP-01**: User can run a representative golden-task corpus covering core CAS engineering workflows.
+- [ ] **REL-01**: Maintainer can deterministically generate and publish reviewable benchmark release artifacts.
+
 ## v2 Requirements
 
 - **LIVE-01**: User can evaluate live model-provider responses through isolated adapters.
@@ -51,8 +57,9 @@
 | METR-01, METR-02, METR-03, METR-04 | Phase 1 | Complete |
 | EVID-01, EVID-02, EVID-03 | Phase 1 | Complete |
 | GOV-01, GOV-02 | Phase 1 | Complete |
+| SHRD-01, CORP-01, REL-01 | Phase 2 | Pending |
 
-**Coverage:** 12 v1 requirements, 12 mapped, 0 unmapped.
+**Coverage:** 15 v1 requirements, 15 mapped, 0 unmapped.
 
 ---
 *Last updated: 2026-06-11 after v0.1 scaffold*
