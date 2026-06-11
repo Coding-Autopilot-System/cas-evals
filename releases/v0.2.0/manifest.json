@@ -1,0 +1,37 @@
+{
+  "evaluator": "cas-evals/0.2.0",
+  "releaseVersion": "v0.2.0",
+  "releasedAt": "2026-06-11T12:00:00Z",
+  "sharedContract": {
+    "provenanceDigest": "sha256:3d82b533691c779e9cf2361f0491a2d8873ef71e22f279c5cfdfc784515be9a5",
+    "release": "https://github.com/Coding-Autopilot-System/cas-contracts/releases/tag/v0.1.0",
+    "repository": "https://github.com/Coding-Autopilot-System/cas-contracts",
+    "tag": "v0.1.0"
+  },
+  "suites": [
+    {
+      "artifact": "golden-results.json",
+      "artifactDigest": "sha256:6b038f3d0f472f4f36ea05fa548f869ff856291da1d86e7af34e0ce5df93b23f",
+      "fixture": "benchmarks/v0.2/golden.json",
+      "fixtureDigest": "sha256:d8c44a1efa541560c4987a78a65dea9691e1a2b9552ebbcfa1de3a99b681b331",
+      "suiteId": "cas-golden-v0.2",
+      "summary": {
+        "failed": 0,
+        "passed": 8,
+        "total": 8
+      }
+    },
+    {
+      "artifact": "adversarial-results.json",
+      "artifactDigest": "sha256:e0a98047b6087ab7630da8a4355cfde37901fcf975beab1574771f12034231ad",
+      "fixture": "benchmarks/v0.2/adversarial.json",
+      "fixtureDigest": "sha256:5c6cbfa0b01e24eee699975ceb26c7bac389d709765211408a0576854e56f2b5",
+      "suiteId": "cas-adversarial-v0.2",
+      "summary": {
+        "failed": 0,
+        "passed": 6,
+        "total": 6
+      }
+    }
+  ]
+}

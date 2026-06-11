@@ -3,4 +3,4 @@
 from .evaluator import evaluate_case, evaluate_suite
 
 __all__ = ["evaluate_case", "evaluate_suite"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
