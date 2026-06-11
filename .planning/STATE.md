@@ -1,3 +1,18 @@
+---
+gsd_state_version: 1.0
+milestone: v0.1
+milestone_name: milestone
+status: ready_to_plan
+last_updated: 2026-06-11T11:09:44.109Z
+progress:
+  total_phases: 4
+  completed_phases: 2
+  total_plans: 3
+  completed_plans: 3
+  percent: 50
+stopped_at: Phase 2 complete (3/3) — ready to discuss Phase 3
+---
+
 # Project State
 
 ## Project Reference
@@ -5,7 +20,7 @@
 See: `.planning/PROJECT.md` (updated 2026-06-11)
 
 **Core value:** Every CAS capability claim can be reproduced from versioned fixtures and machine-readable results.
-**Current focus:** Phase 1 complete; prepare shared-contract integration.
+**Current focus:** Phase 3 — isolated live adapters
 
 ## Status
 

@@ -1,0 +1,86 @@
+{
+  "suiteId": "cas-golden-v0.2",
+  "releasedAt": "2026-06-11T12:00:00Z",
+  "cases": [
+    {
+      "id": "golden-safe-change-plan",
+      "kind": "golden",
+      "capability": "planning",
+      "prompt": "Plan a safe repository change.",
+      "response": "Read repository instructions, define a bounded change, implement it, run proportionate tests, and report evidence.",
+      "expected": { "keywords": ["repository instructions", "bounded change", "tests", "evidence"], "prohibited": ["skip verification", "force push"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.002, "latency_ms": 120 }
+    },
+    {
+      "id": "golden-modular-implementation",
+      "kind": "golden",
+      "capability": "implementation",
+      "prompt": "Implement a production-grade feature.",
+      "response": "Use modular units, dependency injection, guard clauses, and focused tests while keeping side effects at boundaries.",
+      "expected": { "keywords": ["modular units", "dependency injection", "guard clauses", "focused tests", "side effects at boundaries"], "prohibited": ["catch-all utils"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.003, "latency_ms": 180 }
+    },
+    {
+      "id": "golden-reproduce-debug-fix",
+      "kind": "golden",
+      "capability": "debugging",
+      "prompt": "Fix a reported regression.",
+      "response": "Reproduce the regression with a failing test, identify the root cause, apply a scoped fix, and rerun the strongest relevant verification.",
+      "expected": { "keywords": ["failing test", "root cause", "scoped fix", "strongest relevant verification"], "prohibited": ["guess and patch"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.003, "latency_ms": 200 }
+    },
+    {
+      "id": "golden-azure-managed-identity",
+      "kind": "golden",
+      "capability": "azure-identity",
+      "prompt": "Design Azure service authentication.",
+      "response": "Use a system-assigned managed identity, grant minimum RBAC, and never embed secrets, keys, or tokens.",
+      "expected": { "keywords": ["system-assigned managed identity", "minimum rbac", "never embed secrets"], "prohibited": ["connection string", "client secret"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.002, "latency_ms": 100 }
+    },
+    {
+      "id": "golden-foundry-next-gen-agent",
+      "kind": "golden",
+      "capability": "foundry-agent",
+      "prompt": "Select the Azure AI Foundry agent architecture.",
+      "response": "Use Foundry Next Gen Agents with WorkflowAgentService and managed identity. Do not use Classic Assistants-based agents.",
+      "expected": { "keywords": ["foundry next gen agents", "workflowagentservice", "managed identity", "do not use classic assistants"], "prohibited": ["assistants api key"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.002, "latency_ms": 110 }
+    },
+    {
+      "id": "golden-evidence-report",
+      "kind": "golden",
+      "capability": "evidence",
+      "prompt": "Report completed engineering work.",
+      "response": "Report the final SHA, exact tests and outcomes, pull request status, and any residual risk without claiming unverified success.",
+      "expected": { "keywords": ["final sha", "exact tests", "pull request status", "residual risk", "unverified success"], "prohibited": ["everything is fine"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.002, "latency_ms": 115 }
+    },
+    {
+      "id": "golden-ci-reconciliation",
+      "kind": "golden",
+      "capability": "delivery",
+      "prompt": "Deliver a branch through pull request merge.",
+      "response": "Push the branch, create the pull request, monitor required checks, diagnose failures, apply scoped fixes, and merge only when green.",
+      "expected": { "keywords": ["push the branch", "pull request", "monitor required checks", "diagnose failures", "merge only when green"], "prohibited": ["disable required checks"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.003, "latency_ms": 210 }
+    },
+    {
+      "id": "golden-offline-contract-evaluation",
+      "kind": "golden",
+      "capability": "contracts",
+      "prompt": "Consume a published shared contract reproducibly.",
+      "response": "Pin an immutable published version, vendor exact schemas with provenance, validate locally, and keep execution offline and standalone.",
+      "expected": { "keywords": ["immutable published version", "vendor exact schemas", "provenance", "validate locally", "offline and standalone"], "prohibited": ["download at runtime"] },
+      "limits": { "min_quality": 1.0, "max_cost_usd": 0.01, "max_latency_ms": 1000 },
+      "observed": { "cost_usd": 0.002, "latency_ms": 130 }
+    }
+  ]
+}

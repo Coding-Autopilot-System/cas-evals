@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/Coding-Autopilot-System/cas-contracts",
+  "release": "https://github.com/Coding-Autopilot-System/cas-contracts/releases/tag/v0.1.0",
+  "tag": "v0.1.0",
+  "schemas": {
+    "common.schema.json": {
+      "blobSha": "0eec265131a301f924a5ca7fb61718f5bdb14012",
+      "sha256": "c7ce72a6f5da8394e48f2421820588a8142546962e05152997bd1e6ced994928",
+      "source": "https://raw.githubusercontent.com/Coding-Autopilot-System/cas-contracts/v0.1.0/schemas/v0.1/common.schema.json"
+    },
+    "evaluation-result.schema.json": {
+      "blobSha": "719f46a6ee9024fa4462094c3d0c21d838c20f17",
+      "sha256": "be6d3216c95cfa6d2ccda908ff089010765b1c70223a920bfe3cb70a0cd24df5",
+      "source": "https://raw.githubusercontent.com/Coding-Autopilot-System/cas-contracts/v0.1.0/schemas/v0.1/evaluation-result.schema.json"
+    }
+  }
+}

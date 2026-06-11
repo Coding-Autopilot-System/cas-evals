@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Coding-Autopilot-System/cas-evals/schemas/evaluation-suite.schema.json",
+  "title": "CAS Evaluation Suite Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "suiteId", "results", "evidence", "summary"],
+  "properties": {
+    "schemaVersion": { "const": "0.2.0" },
+    "suiteId": { "type": "string", "minLength": 1 },
+    "results": {
+      "type": "array",
+      "items": { "$ref": "https://schemas.coding-autopilot.dev/v0.1/evaluation-result.schema.json" }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["caseId", "fixtureDigest", "passed", "metrics"]
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "passed", "failed"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}
