@@ -39,6 +39,12 @@ class SharedContractTests(unittest.TestCase):
         with self.assertRaises(ContractValidationError):
             validate_evaluation_result(invalid)
 
+    def test_date_without_time_fails_date_time_format(self):
+        invalid = copy.deepcopy(self.result)
+        invalid["timestamp"] = "2026-06-11"
+        with self.assertRaises(ContractValidationError):
+            validate_evaluation_result(invalid)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -32,6 +32,7 @@ _RESULT_FIELDS = {
 }
 _TRACEPARENT = re.compile(r"^[\da-f]{2}-[\da-f]{32}-[\da-f]{16}-[\da-f]{2}$")
 _REPO = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+_DATE_TIME = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$")
 
 
 class ContractValidationError(ValueError):
@@ -42,9 +43,10 @@ def _load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _require_string(value: Any, field: str, minimum: int = 1, maximum: int = 128) -> str:
-    if not isinstance(value, str) or not minimum <= len(value) <= maximum:
-        raise ContractValidationError(f"{field} must be a string with length {minimum}..{maximum}")
+def _require_string(value: Any, field: str, minimum: int = 1, maximum: int | None = 128) -> str:
+    if not isinstance(value, str) or len(value) < minimum or (maximum is not None and len(value) > maximum):
+        limit = f"{minimum}..{maximum}" if maximum is not None else f"at least {minimum}"
+        raise ContractValidationError(f"{field} must be a string with length {limit}")
     return value
 
 
@@ -82,7 +84,7 @@ def validate_evaluation_result(result: dict[str, Any]) -> None:
 
     for field in ("correlationId", "promptId", "runId"):
         _require_string(result[field], field)
-    repo = _require_string(result["repo"], "repo", maximum=512)
+    repo = _require_string(result["repo"], "repo", maximum=None)
     if not _REPO.fullmatch(repo):
         raise ContractValidationError("repo must use owner/name format")
     if result["schemaVersion"] != CONTRACT_VERSION:
@@ -99,8 +101,10 @@ def validate_evaluation_result(result: dict[str, Any]) -> None:
     if "displayName" in actor:
         _require_string(actor["displayName"], "actor.displayName", maximum=256)
 
-    timestamp = _require_string(result["timestamp"], "timestamp", maximum=64)
+    timestamp = _require_string(result["timestamp"], "timestamp", maximum=None)
     try:
+        if not _DATE_TIME.fullmatch(timestamp):
+            raise ValueError
         datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
     except ValueError as error:
         raise ContractValidationError("timestamp must be an ISO 8601 date-time") from error
@@ -111,7 +115,7 @@ def validate_evaluation_result(result: dict[str, Any]) -> None:
     if not isinstance(trace["traceparent"], str) or not _TRACEPARENT.fullmatch(trace["traceparent"]):
         raise ContractValidationError("traceContext.traceparent is invalid")
     if "tracestate" in trace:
-        _require_string(trace["tracestate"], "traceContext.tracestate", maximum=512)
+        _require_string(trace["tracestate"], "traceContext.tracestate", minimum=0, maximum=512)
 
     if result["kind"] != "EvaluationResult":
         raise ContractValidationError("kind must be EvaluationResult")
@@ -122,6 +126,6 @@ def validate_evaluation_result(result: dict[str, Any]) -> None:
     if not isinstance(metrics, dict) or not metrics:
         raise ContractValidationError("metrics must be a non-empty object")
     for name, value in metrics.items():
-        _require_string(name, "metric name", maximum=256)
+        _require_string(name, "metric name", minimum=0, maximum=None)
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
             raise ContractValidationError(f"metric {name} must be a finite number")

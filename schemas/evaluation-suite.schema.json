@@ -10,7 +10,7 @@
     "suiteId": { "type": "string", "minLength": 1 },
     "results": {
       "type": "array",
-      "items": { "$ref": "../vendor/cas-contracts/v0.1.0/evaluation-result.schema.json" }
+      "items": { "$ref": "https://schemas.coding-autopilot.dev/v0.1/evaluation-result.schema.json" }
     },
     "evidence": {
       "type": "array",
