@@ -12,7 +12,11 @@ Every CAS capability claim can be reproduced from versioned fixtures and machine
 
 ### Validated
 
-(None yet - ship to validate)
+- [x] Shared evaluation results consume provenance-pinned published `cas-contracts` schemas offline.
+- [x] The public corpus represents core CAS engineering workflows and independent safety risks.
+- [x] Benchmark release artifacts regenerate byte-identically with machine-readable provenance.
+
+Validated in Phase 2: Shared Contracts And Corpus.
 
 ### Active
 
@@ -50,7 +54,9 @@ CAS needs measurable proof that its prompt refinement, autonomous engineering, a
 
 This document evolves at phase transitions and milestone boundaries.
 
+Phase 2 is complete. The repository now consumes shared contracts offline, runs a representative v0.2 corpus, and publishes reproducible v0.2.0 release evidence. Phase 3 adds isolated opt-in live adapters.
+
 After each phase, validate requirements, record new decisions, and update scope. After each milestone, review the core value, exclusions, and evidence quality.
 
 ---
-*Last updated: 2026-06-11 after initialization*
+*Last updated: 2026-06-11 after Phase 2 completion*

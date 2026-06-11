@@ -16,6 +16,8 @@
 
 Consume versioned `cas-contracts` schemas, expand representative CAS golden tasks, and publish benchmark release artifacts.
 
+**Status:** Complete (2026-06-11)
+
 ## Phase 3: Isolated Live Adapters
 
 Add opt-in provider adapters with redaction, managed identity where applicable, cost controls, and recorded provenance.
@@ -23,3 +25,12 @@ Add opt-in provider adapters with redaction, managed identity where applicable, 
 ## Phase 4: Statistical And Longitudinal Evidence
 
 Add repeated-run statistics, baseline comparison, regression budgets, signed reports, and a public trend dashboard.
+
+## Progress
+
+| Phase | Status | Completed |
+|-------|--------|-----------|
+| 1. Reproducible Evaluation Kernel | Complete | 2026-06-11 |
+| 2. Shared Contracts And Corpus | Complete | 2026-06-11 |
+| 3. Isolated Live Adapters | Pending | - |
+| 4. Statistical And Longitudinal Evidence | Pending | - |
