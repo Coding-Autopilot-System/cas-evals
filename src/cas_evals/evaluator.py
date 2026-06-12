@@ -23,8 +23,25 @@ def _traceparent(case_id: str) -> str:
     return f"00-{trace_id}-{parent_id}-01"
 
 
+def lifecycle_metadata(case_id: str, suite_id: str, released_at: str) -> dict[str, Any]:
+    """Build deterministic lifecycle metadata shared by offline and live evaluations."""
+    return {
+        "correlationId": f"eval-{case_id}",
+        "promptId": case_id,
+        "runId": suite_id,
+        "timestamp": released_at,
+        "traceContext": {"traceparent": _traceparent(case_id)},
+    }
+
+
 def _evaluate_case_with_evidence(
-    case: dict[str, Any], suite_id: str, released_at: str
+    case: dict[str, Any],
+    suite_id: str,
+    released_at: str,
+    *,
+    source_case: dict[str, Any] | None = None,
+    metadata: dict[str, Any] | None = None,
+    execution_evidence: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     required = {"id", "kind", "prompt", "response", "expected", "limits"}
     missing = sorted(required - case.keys())
@@ -52,17 +69,18 @@ def _evaluate_case_with_evidence(
         "latency_ms": _metric(latency, float(limits["max_latency_ms"]), latency <= float(limits["max_latency_ms"]), {"source": "fixture"}),
     }
     passed = all(metric["passed"] for metric in evidence.values())
-    canonical = json.dumps(case, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    canonical = json.dumps(source_case or case, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    lifecycle = metadata or lifecycle_metadata(case["id"], suite_id, released_at)
     result = {
         "kind": "EvaluationResult",
-        "correlationId": f"eval-{case['id']}",
-        "promptId": case["id"],
-        "runId": suite_id,
+        "correlationId": lifecycle["correlationId"],
+        "promptId": lifecycle["promptId"],
+        "runId": lifecycle["runId"],
         "repo": "Coding-Autopilot-System/cas-evals",
         "actor": {"id": "cas-evals", "type": "service"},
-        "timestamp": released_at,
+        "timestamp": lifecycle["timestamp"],
         "schemaVersion": CONTRACT_VERSION,
-        "traceContext": {"traceparent": _traceparent(case["id"])},
+        "traceContext": lifecycle["traceContext"],
         "evaluator": f"cas-evals/{EVALUATOR_VERSION}",
         "outcome": "passed" if passed else "failed",
         "metrics": {
@@ -79,6 +97,8 @@ def _evaluate_case_with_evidence(
         "passed": passed,
         "metrics": evidence,
     }
+    if execution_evidence is not None:
+        case_evidence["execution"] = execution_evidence
     return result, case_evidence
 
 
