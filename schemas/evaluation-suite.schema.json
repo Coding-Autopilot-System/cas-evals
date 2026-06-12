@@ -16,7 +16,13 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["caseId", "fixtureDigest", "passed", "metrics"]
+        "required": ["caseId", "fixtureDigest", "passed", "metrics"],
+        "properties": {
+          "execution": {
+            "type": "object",
+            "description": "Optional deterministic provenance emitted by an opt-in live adapter."
+          }
+        }
       }
     },
     "summary": {

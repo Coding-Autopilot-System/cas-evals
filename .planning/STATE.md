@@ -27,3 +27,11 @@ See: `.planning/PROJECT.md` (updated 2026-06-11)
 - v0.1 scaffold implemented.
 - Deterministic benchmark and test evidence required before release.
 - Next phase: consume published `cas-contracts` schemas without weakening standalone execution.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Status | Directory |
+|---|-------------|------|--------|--------|-----------|
+| 260612-sob | Deterministic cas-reference-product golden path | 2026-06-12 | `aaeed60` | Verified | [260612-sob-implement-deterministic-cas-reference-pr](./quick/260612-sob-implement-deterministic-cas-reference-pr/) |
+
+Last activity: 2026-06-12 - Completed quick task 260612-sob: deterministic cas-reference-product golden path
