@@ -22,6 +22,20 @@ The CLI exits non-zero when any mandatory metric fails, making each suite usable
 
 Windows users can run the complete verification path with `.\scripts\verify.ps1`. The checked-in [v0.2 benchmark report](docs/benchmark-report-v0.2.md) and [`releases/v0.2.0/`](releases/v0.2.0/) artifacts record the reproducible public baseline.
 
+## Reference Product Golden Path
+
+The default CLI remains fully offline. To evaluate actual output from a running
+local `cas-reference-product` workflow:
+
+```powershell
+python -m cas_evals.cli benchmarks/reference-product/v0.1/golden.json --reference-product-url
+python -m cas_evals.cli benchmarks/reference-product/v0.1/adversarial.json --reference-product-url
+```
+
+The opt-in adapter preserves lifecycle metadata, fails closed on metadata drift,
+scores the returned workflow output, and persists deterministic evidence with
+normalized timing. See [the reference-product integration guide](docs/reference-product-integration.md).
+
 ## Metrics
 
 | Metric | v0.1 evidence | Gate |
@@ -43,6 +57,7 @@ See [`schemas/evaluation-suite.schema.json`](schemas/evaluation-suite.schema.jso
 
 ```text
 benchmarks/v0.2/       Representative golden and adversarial fixtures
+benchmarks/reference-product/  Opt-in local workflow integration fixtures
 releases/v0.2.0/       Reproducible benchmark release artifacts
 schemas/               Machine-readable suite evidence contract
 vendor/cas-contracts/  Pinned published shared contracts
