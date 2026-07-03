@@ -5,3 +5,9 @@ dist/
 build/
 *.egg-info/
 artifacts/
+
+# Node / Playwright UI test artifacts (tests/ui)
+node_modules/
+playwright-report/
+test-results/
+.playwright/

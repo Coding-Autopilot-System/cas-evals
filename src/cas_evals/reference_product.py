@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import concurrent.futures
 import hashlib
 import json
 from collections.abc import Callable
@@ -122,9 +123,8 @@ def evaluate_reference_suite(
     suite = json.loads(fixture_path.read_text(encoding="utf-8"))
     released_at = suite.get("releasedAt", DEFAULT_RELEASED_AT)
     invoke = transport or _http_transport(endpoint, timeout_seconds)
-    evaluated = []
 
-    for source_case in suite["cases"]:
+    def process_case(source_case: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         envelope = _build_envelope(source_case, suite["suiteId"], released_at)
         output, events = _validate_response(invoke(envelope), envelope)
         live_case = {**source_case, "response": output}
@@ -142,16 +142,17 @@ def evaluate_reference_suite(
                 "normalization": "fixture-observed",
             },
         }
-        evaluated.append(
-            _evaluate_case_with_evidence(
-                live_case,
-                suite["suiteId"],
-                released_at,
-                source_case=source_case,
-                metadata=envelope,
-                execution_evidence=evidence,
-            )
+        return _evaluate_case_with_evidence(
+            live_case,
+            suite["suiteId"],
+            released_at,
+            source_case=source_case,
+            metadata=envelope,
+            execution_evidence=evidence,
         )
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        evaluated = list(executor.map(process_case, suite["cases"]))
 
     results = [result for result, _ in evaluated]
     return {
