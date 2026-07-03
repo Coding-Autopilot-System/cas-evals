@@ -1,5 +1,8 @@
 # CAS Evals
 
+[![CI](https://github.com/Coding-Autopilot-System/cas-evals/actions/workflows/ci.yml/badge.svg)](https://github.com/Coding-Autopilot-System/cas-evals/actions/workflows/ci.yml) [![CodeQL](https://github.com/Coding-Autopilot-System/cas-evals/actions/workflows/codeql.yml/badge.svg)](https://github.com/Coding-Autopilot-System/cas-evals/actions/workflows/codeql.yml)
+
+
 Public, reproducible evaluation evidence for the [Coding Autopilot System](https://github.com/Coding-Autopilot-System).
 
 CAS Evals runs versioned golden tasks and adversarial prompts against deterministic reference responses. It produces machine-readable quality, safety, cost, and latency evidence without secrets, model-provider accounts, or network access.
