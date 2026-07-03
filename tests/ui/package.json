@@ -1,0 +1,13 @@
+{
+  "name": "cas-ui-evals",
+  "version": "1.0.0",
+  "description": "Centralized Playwright suite for CAS Ecosystem",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.0",
+    "@types/node": "^20.0.0"
+  }
+}
