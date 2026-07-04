@@ -6,8 +6,14 @@ import threading
 import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from unittest.mock import patch
+from urllib.error import URLError
 
-from cas_evals.reference_product import ReferenceProductError, evaluate_reference_suite
+from cas_evals.reference_product import (
+    ReferenceProductError,
+    _http_transport,
+    evaluate_reference_suite,
+)
 
 ROOT = Path(__file__).parents[1]
 GOLDEN = ROOT / "benchmarks/reference-product/v0.1/golden.json"
@@ -104,6 +110,18 @@ class ReferenceProductTests(unittest.TestCase):
             evaluate_reference_suite(GOLDEN, endpoint="file:///tmp/workflow")
         with self.assertRaises(ReferenceProductError):
             evaluate_reference_suite(GOLDEN, timeout_seconds=0)
+
+    def test_network_failure_preserves_root_cause(self):
+        failure = URLError("network unavailable")
+        transport = _http_transport("http://127.0.0.1:8080/api/v1/workflows", 1.0)
+
+        with patch("cas_evals.reference_product.urlopen", side_effect=failure):
+            with self.assertRaisesRegex(
+                ReferenceProductError, "reference product is unavailable"
+            ) as caught:
+                transport({"kind": "PromptEnvelope"})
+
+        self.assertIs(caught.exception.__cause__, failure)
 
     def test_http_endpoint_is_executable(self):
         server = ThreadingHTTPServer(("127.0.0.1", 0), ReferenceHandler)
