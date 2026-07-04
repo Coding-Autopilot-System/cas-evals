@@ -47,9 +47,9 @@ def _http_transport(endpoint: str, timeout_seconds: float) -> Transport:
             with urlopen(request, timeout=timeout_seconds) as response:
                 payload = response.read(MAX_RESPONSE_BYTES + 1)
         except HTTPError as error:
-            raise ReferenceProductError(f"reference product returned HTTP {error.code}") from None
-        except (URLError, TimeoutError, OSError):
-            raise ReferenceProductError("reference product is unavailable") from None
+            raise ReferenceProductError(f"reference product returned HTTP {error.code}") from error
+        except (URLError, TimeoutError, OSError) as error:
+            raise ReferenceProductError("reference product is unavailable") from error
         if len(payload) > MAX_RESPONSE_BYTES:
             raise ReferenceProductError("reference product response exceeds the size limit")
         try:
