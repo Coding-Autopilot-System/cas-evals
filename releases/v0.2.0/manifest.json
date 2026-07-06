@@ -3,7 +3,7 @@
   "releaseVersion": "v0.2.0",
   "releasedAt": "2026-06-11T12:00:00Z",
   "sharedContract": {
-    "provenanceDigest": "sha256:3d82b533691c779e9cf2361f0491a2d8873ef71e22f279c5cfdfc784515be9a5",
+    "provenanceDigest": "sha256:d206cb050c42c80d10d37b418f6a6bbb9da08aba0ae76e77d3344108613829a2",
     "release": "https://github.com/Coding-Autopilot-System/cas-contracts/releases/tag/v0.1.0",
     "repository": "https://github.com/Coding-Autopilot-System/cas-contracts",
     "tag": "v0.1.0"

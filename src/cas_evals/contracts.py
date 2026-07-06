@@ -61,9 +61,9 @@ def verify_vendored_contract() -> dict[str, Any]:
 
     common = _load_json(VENDOR_DIR / "common.schema.json")
     evaluation = _load_json(VENDOR_DIR / "evaluation-result.schema.json")
-    if common.get("$id") != "https://schemas.coding-autopilot.dev/v0.1/common.schema.json":
+    if common.get("$id") != "https://coding-autopilot-system.github.io/cas-contracts/registry/v0.1/common.schema.json":
         raise ContractValidationError("unexpected common schema identity")
-    if evaluation.get("$id") != "https://schemas.coding-autopilot.dev/v0.1/evaluation-result.schema.json":
+    if evaluation.get("$id") != "https://coding-autopilot-system.github.io/cas-contracts/registry/v0.1/evaluation-result.schema.json":
         raise ContractValidationError("unexpected evaluation schema identity")
     if evaluation["allOf"][0].get("$ref") != "common.schema.json#/$defs/lifecycleMetadata":
         raise ContractValidationError("evaluation schema does not reference the vendored common schema")
