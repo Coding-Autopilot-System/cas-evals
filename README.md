@@ -76,3 +76,5 @@ tests/                 Determinism, safety, and CLI contract tests
 3. Add repeated-run statistics, signed reports, and longitudinal trends.
 
 See [SECURITY.md](SECURITY.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
+
+<!-- docs-verified: 4fe936cc83ffdc4fd6ad825c373e949b1edbe0eb 2026-07-08 -->
