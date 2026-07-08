@@ -26,3 +26,25 @@ jobs:
       - run: python -m cas_evals.cli benchmarks/v0.2/golden.json
       - run: python -m cas_evals.cli benchmarks/v0.2/adversarial.json
       - run: python -m cas_evals.release --check
+
+  registry-smoke:
+    # Separate from the offline `verify` matrix job because this job needs
+    # network egress and should not block the offline unit-test matrix on
+    # transient network failures. As of this job's introduction, the
+    # cas-contracts PR from plan 32-01 (rewriting schema $id to this same
+    # Pages registry URL) has not yet merged. This job checks paths that
+    # already resolve today regardless of that PR's merge status -- the
+    # v0.1/v1.0/v1.1 registry lines were published by prior phases' pages.yml
+    # work. Merging 32-01 only changes the $id field text embedded inside
+    # those already-resolving files, not which URLs exist.
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -e .
+      - run: python -m cas_evals.registry_check
