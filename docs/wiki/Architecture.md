@@ -1,5 +1,7 @@
 # Architecture
 
+![Architecture Diagram](assets/arch.png)
+
 ## Evidence gate flow
 
 ```mermaid
