@@ -30,6 +30,8 @@ Every per-case result generates an `EvaluationResult` conforming to the pinned `
 
 The following Mermaid diagram visualizes the evaluation pipeline across both offline and live modes.
 
+![Visual Diagram](assets/cas_evals_architecture.png)
+
 ```mermaid
 flowchart TD
     %% CLI and Input
